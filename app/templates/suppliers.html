@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+        <p><a href="{{ url_for('main.add_supplier') }}">Добавить нового поставщика</a></p>
+    {% if suppliers %}
+    <table style = "border: 1px">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Код</th>
+                <th>Наименование</th>
+                <th>ИНН</th>
+                <th>Юр. адрес (Индекс, Город, Улица, Дом)</th>
+                <th>Банк. счет</th>
+                <th>Адрес банка (Индекс, Город, Улица, Дом)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for supplier in suppliers %}
+            <tr>
+                <td>{{ supplier.id }}</td>
+                <td>{{ supplier.supplier_code }}</td>
+                <td>{{ supplier.supplier_name }}</td>
+                <td>{{ supplier.tin }}</td>
+                <td>
+                    {{ supplier.legal_postal_code or '' }},
+                    {{ supplier.legal_city or '' }},
+                    {{ supplier.legal_street or '' }},
+                    {{ supplier.legal_house or '' }}
+                </td>
+                <td>{{ supplier.bank_account_number or '' }}</td>
+                <td>
+                    {{ supplier.bank_postal_code or '' }},
+                    {{ supplier.bank_city or '' }},
+                    {{ supplier.bank_street or '' }},
+                    {{ supplier.bank_house or '' }}
+                </td>
+                <td>
+                    <a href="{{ url_for('main.edit_supplier', supplier_id=supplier.id) }}">Редактировать</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Поставщиков пока нет.</p>
+    {% endif %}
+{% endblock %}

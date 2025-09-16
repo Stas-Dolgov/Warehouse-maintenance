@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+    <h1>{{ title }}</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+
+        <h3>Основные данные</h3>
+        <p>
+            {{ form.supplier.label }}<br>
+            {{ form.supplier() }}
+            {% for error in form.supplier.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}
+        </p>
+        <p>
+            {{ form.material.label }}<br>
+            {{ form.material() }}
+            {% for error in form.material.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}
+        </p>
+        <p>
+            {{ form.unit.label }}<br>
+            {{ form.unit() }}
+            {% for error in form.unit.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}
+        </p>
+        <p>
+            {{ form.quantity_received.label }}<br>
+            {{ form.quantity_received(size=32) }}
+            {% for error in form.quantity_received.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}
+        </p>
+        <p>
+            {{ form.unit_price.label }}<br>
+            {{ form.unit_price(size=32) }}
+            {% for error in form.unit_price.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}
+        </p>
+
+        <hr>
+        <h3>Бухгалтерская информация</h3>
+        <p>
+            {{ form.balance_account.label }}<br>
+            {{ form.balance_account(size=64) }}
+            {% for error in form.balance_account.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}
+        </p>
+        <p>
+            {{ form.material_account.label }}<br>
+            {{ form.material_account(size=64) }}
+            {% for error in form.material_account.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}
+        </p>
+
+        <hr>
+        <h3>Сопроводительные документы</h3>
+        <p>
+            {{ form.order_number.label }}<br>
+            {{ form.order_number(size=64) }}
+            {% for error in form.order_number.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}
+        </p>
+        <p>
+            {{ form.accompanying_document_code.label }}<br>
+            {{ form.accompanying_document_code(size=64) }}
+            {% for error in form.accompanying_document_code.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}
+        </p>
+        <p>
+            {{ form.accompanying_document_number.label }}<br>
+            {{ form.accompanying_document_number(size=64) }}
+            {% for error in form.accompanying_document_number.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}
+        </p>
+
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}

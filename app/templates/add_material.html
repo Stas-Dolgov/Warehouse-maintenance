@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.material_code.label }}<br>
+            {{ form.material_code(size=32) }}
+            {% for error in form.material_code.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}
+        </p>
+        <p>
+            {{ form.material_class_code.label }}<br>
+            {{ form.material_class_code(size=32) }}
+            {% for error in form.material_class_code.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}
+        </p>
+        <p>
+            {{ form.material_group_code.label }}<br>
+            {{ form.material_group_code(size=32) }}
+            {% for error in form.material_group_code.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}
+        </p>
+        <p>
+            {{ form.material_name.label }}<br>
+            {{ form.material_name(size=64) }}
+            {% for error in form.material_name.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}

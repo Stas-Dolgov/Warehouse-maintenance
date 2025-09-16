@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        
+        <h3>Основные данные</h3>
+        <p>
+            {{ form.supplier_code.label }}<br>
+            {{ form.supplier_code(size=32) }}
+            {% for error in form.supplier_code.errors %}<span style="color: rgb(183, 79, 79);">[{{ error }}]</span>{% endfor %}
+        </p>
+        <p>
+            {{ form.supplier_name.label }}<br>
+            {{ form.supplier_name(size=64) }}
+            {% for error in form.supplier_name.errors %}<span style="color: rgb(183, 79, 79);">[{{ error }}]</span>{% endfor %}
+        </p>
+        <p>
+            {{ form.tin.label }}<br>
+            {{ form.tin(size=32) }}
+            {% for error in form.tin.errors %}<span style="color: rgb(183, 79, 79);">[{{ error }}]</span>{% endfor %}
+        </p>
+
+        <hr>
+        <h3>Юридический адрес</h3>
+        <p>
+            {{ form.legal_postal_code.label }}<br>
+            {{ form.legal_postal_code(size=32) }}
+        </p>
+        <p>
+            {{ form.legal_city.label }}<br>
+            {{ form.legal_city(size=32) }}
+        </p>
+        <p>
+            {{ form.legal_street.label }}<br>
+            {{ form.legal_street(size=64) }}
+        </p>
+        <p>
+            {{ form.legal_house.label }}<br>
+            {{ form.legal_house(size=32) }}
+        </p>
+
+        <hr>
+        <h3>Банковские реквизиты</h3>
+        <p>
+            {{ form.bank_account_number.label }}<br>
+            {{ form.bank_account_number(size=32) }}
+        </p>
+        <p>
+            {{ form.bank_postal_code.label }}<br>
+            {{ form.bank_postal_code(size=32) }}
+        </p>
+        <p>
+            {{ form.bank_city.label }}<br>
+            {{ form.bank_city(size=32) }}
+        </p>
+        <p>
+            {{ form.bank_street.label }}<br>
+            {{ form.bank_street(size=64) }}
+        </p>
+        <p>
+            {{ form.bank_house.label }}<br>
+            {{ form.bank_house(size=32) }}
+        </p>
+
+        <p>{{ form.submit() }}</p>
+    </form>
+    
+{% endblock %}

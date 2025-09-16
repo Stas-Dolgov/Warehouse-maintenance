@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+    <h1>{{ title }}</h1>
+    <p><a href="{{ url_for('main.add_unit') }}">Добавить новую единицу</a></p>
+    {% if units %}
+    <table style = "border: 1px">
+        <thead><tr><th>ID</th><th>Наименование</th></tr></thead>
+        <tbody>
+            {% for unit in units %}
+            <tr><td>{{ unit.id }}</td><td>{{ unit.unit_name }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Единиц измерения пока нет.</p>
+    {% endif %}
+{% endblock %}

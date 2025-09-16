@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+
+    {% if report_data %}
+    <table style = "border: 1px">
+        <thead>
+            <tr>
+                <th>Адрес банка</th>
+                <th>Количество поставщиков</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in report_data %}
+            <tr>
+                <td>
+                    {{ row[0] or '' }}, {{ row[1] or '' }}, {{ row[2] or '' }}, {{ row[3] or '' }}
+                </td>
+                <td>
+                    {{ row[4] }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Нет данных для построения отчета. Убедитесь, что у поставщиков указаны адреса банков.</p>
+    {% endif %}
+
+    <p style="margin-top: 20px;">
+        <a href="{{ url_for('main.index') }}">На главную</a>
+    </p>
+{% endblock %}

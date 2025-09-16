@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Складское приложение{% endblock %}</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        nav { background-color: #f2f2f2; padding: 10px; margin-bottom: 20px; }
+        nav a { margin-right: 15px; text-decoration: none; color: #333; }
+        .flash { list-style: none; padding: 10px; margin: 10px 0; border: 1px solid #ccc; }
+        .flash.success { background-color: #d4edda; color: #155724; }
+        table { border-collapse: collapse; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('main.index') }}">Главная</a>
+        <a href="{{ url_for('main.storage_units') }}">Складские единицы</a>
+        <a href="{{ url_for('main.suppliers') }}">Поставщики</a>
+        <a href="{{ url_for('main.materials') }}">Материалы</a>
+        <a href="{{ url_for('main.units') }}">Единицы измерения</a>
+        <a href="{{ url_for('main.bank_report') }}">Отчет по банкам</a>
+    </nav>
+
+    <hr>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul class="flash">
+        {% for category, message in messages %}
+        <li class="flash {{ category }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+
+</body>
+</html>

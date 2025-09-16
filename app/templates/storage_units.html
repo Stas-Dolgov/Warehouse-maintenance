@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+    <h1>{{ title }}</h1>
+    <p><a href="{{ url_for('main.add_storage_unit') }}">Добавить новую запись</a></p>
+    {% if units %}
+    <table style = "border: 1px">
+        <thead>
+            <tr>
+                <th>Дата</th>
+                <th>Поставщик</th>
+                <th>Материал</th>
+                <th>Кол-во</th>
+                <th>Ед. изм.</th>
+                <th>Цена за ед.</th>
+                <th>Номер заказа</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for unit in units %}
+            <tr>
+                <td>{{ unit.date.strftime('%Y-%m-%d') }}</td>
+                <td>{{ unit.supplier.supplier_name }}</td>
+                <td>{{ unit.material.material_name }}</td>
+                <td>{{ unit.quantity_received }}</td>
+                <td>{{ unit.unit.unit_name }}</td>
+                <td>{{ unit.unit_price }}</td>
+                <td>{{ unit.order_number }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Записей о поступлениях пока нет.</p>
+    {% endif %}
+{% endblock %}

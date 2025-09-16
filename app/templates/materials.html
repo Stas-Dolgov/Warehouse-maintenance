@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <p><a href="{{ url_for('main.add_material') }}">Добавить новый материал</a></p>
+
+    {% if materials %}
+    <table style = "border: 1px">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Код материала</th>
+                <th>Код класса</th>
+                <th>Код группы</th>
+                <th>Наименование</th>
+                <th>Кол-во поставщиков</th> <!-- Задание №1-->
+            </tr>
+        </thead>
+        <tbody>
+            {% for material in materials %}
+            <tr>
+                <td>{{ material.id }}</td>
+                <td>{{ material.material_code }}</td>
+                <td>{{ material.material_class_code }}</td>
+                <td>{{ material.material_group_code }}</td>
+                <td>
+                    <a href="{{ url_for('main.suppliers_for_material', material_id=material.id) }}"> <!-- Задание №3-->
+                        {{ material.material_name }}
+                    </a>
+                </td>
+                <td>
+                    <!-- 
+                        1. material.storage_units: Берет все записи о поставках для данного материала.
+                        2. .with_entities(StorageUnit.supplier_id): Из этих записей выбирает только колонку с ID поставщика.
+                        3. .distinct(): Оставляет только уникальные ID.
+                        4. .count(): Считает их количество.
+                    -->
+                    {{ material.storage_units.with_entities(models.StorageUnit.supplier_id).distinct().count() }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Материалов пока нет.</p>
+    {% endif %}
+{% endblock %}
