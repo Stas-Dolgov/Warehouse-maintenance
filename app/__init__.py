@@ -1,6 +1,7 @@
 from flask import Flask
 from config import Config
 from .models import db
+from flask_migrate import Migrate
 
 
 def create_app(config_class=Config):
@@ -8,6 +9,7 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
 
     db.init_app(app)
+    Migrate(app, db)
 
     from app.routes import main as main_blueprint
 
