@@ -15,7 +15,7 @@ services:
     restart: unless-stopped
 
   app:
-    build: .
+    image: energystas/warehouse-maintenance:dev-latest
     container_name: warehouse_app
     volumes:
       - .:/app
