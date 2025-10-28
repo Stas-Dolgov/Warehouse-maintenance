@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: warehouse_db
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=warehouse_db
+      - POSTGRES_USER=warehouse_user
+      - POSTGRES_PASSWORD=strongpassword123
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  app:
+    image: energystas/warehouse-maintenance:dev-latest
+    container_name: warehouse_app
+    volumes:
+      - .:/app
+    environment:
+      - DATABASE_URL=postgresql://warehouse_user:strongpassword123@db:5432/warehouse_db
+      - SECRET_KEY=your-secret-key-here
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    command: >
+      sh -c "sleep 15 &&
+             python -c 'from run import app, db; app.app_context().push(); db.create_all()' &&
+             gunicorn --bind 0.0.0.0:5000 run:app"
+    restart: unless-stopped
