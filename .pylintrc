@@ -1,0 +1,9 @@
+[MASTER]
+ignore=.venv,venv,__pycache__,build,dist,migrations,db_data,logs
+
+[MESSAGES CONTROL]
+disable=all
+enable=F
+
+[REPORTS]
+score=no

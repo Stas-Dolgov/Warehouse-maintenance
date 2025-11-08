@@ -1,0 +1,2 @@
+exclude_dirs: ["tests", "migrations", ".venv", "venv", "__pycache__", "build", "dist", "db_data", "logs"]
+skips: []
