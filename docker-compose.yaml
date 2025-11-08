@@ -7,9 +7,15 @@ services:
     volumes:
       - ./db_data:/var/lib/postgresql/data
     environment:
+<<<<<<< HEAD
       POSTGRES_DB: warehouse_db
       POSTGRES_USER: warehouse_user
       POSTGRES_PASSWORD: strongpassword123
+=======
+      - POSTGRES_DB=warehouse_db
+      - POSTGRES_USER=warehouse_user
+      - POSTGRES_PASSWORD=strongpassword123
+>>>>>>> origin/main
     ports:
       - "5432:5432"
     restart: unless-stopped
@@ -28,6 +34,12 @@ services:
       - db
     command: >
       sh -c "sleep 15 &&
+<<<<<<< HEAD
       python -c 'from run import app, db; app.app_context().push(); db.create_all()' &&
       gunicorn --bind 0.0.0.0:5000 run:app"
     restart: unless-stopped
+=======
+             python -c 'from run import app, db; app.app_context().push(); db.create_all()' &&
+             gunicorn --bind 0.0.0.0:5000 run:app"
+    restart: unless-stopped
+>>>>>>> origin/main
